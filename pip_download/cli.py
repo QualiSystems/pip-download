@@ -76,7 +76,7 @@ def cli(
         py_versions, platforms, index_url, extra_index_url, find_links
     )
 
-    requirements = requirement if requirement else requirements_file
+    requirements = [requirement] if requirement else requirements_file
     if dry_run and requirements_range:
         click.echo(downloader.get_str_requirements_range(requirements))
     elif dry_run and not requirements_range:
