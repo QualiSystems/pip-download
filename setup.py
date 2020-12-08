@@ -7,12 +7,11 @@ def read_file(file_name):
 
 
 setup(
-    name="saklar13-pip-download",
+    name="cloudshell-pip-download",
     version=read_file("version.txt"),
     description="downloads python packages for specified platform and python version",
     author="Kyrylo Maksymenko",
     author_email="saklar13@gmail.com",
-    url="https://github.com/saklar13/pip-download",
     packages=find_packages(),
     entry_points={"console_scripts": ["pip-download = pip_download.cli:cli"]},
     include_package_data=True,
