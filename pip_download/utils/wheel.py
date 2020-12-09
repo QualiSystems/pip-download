@@ -15,7 +15,8 @@ def is_compatible_wheel(
 
 
 def is_compatible_py_version(wheel: Wheel, py_versions: Set[str]) -> bool:
-    return bool(set(wheel.pyversions) & py_versions)
+    abis = get_supported_abis(py_versions)
+    return bool(set(wheel.pyversions) & py_versions) or bool(set(wheel.abis) & abis)
 
 
 def is_compatible_platform(wheel: Wheel, platforms: Set[str]) -> bool:
@@ -45,3 +46,11 @@ def get_supported_py_versions(py_versions: Iterable[str]) -> Set[str]:
             py_num = py_version[2:]
             py_versions |= {f"py{py_num}", f"py{py_num[0]}"}
     return py_versions
+
+
+def get_supported_abis(py_versions: Set[str]) -> Set[str]:
+    return {
+        f"abi{py_version[2]}"
+        for py_version in py_versions
+        if py_version.startswith("cp")
+    }
