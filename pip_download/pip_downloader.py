@@ -65,8 +65,8 @@ class PipDownloader:
             )
         else:
             constraints = {
-                InstallRequirement(PipRequirement(req), comes_from="line")
-                for req in requirements
+                InstallRequirement(PipRequirement.parse(req), comes_from="line")
+                for req in filter(None, requirements)
             }
         cache = DependencyCache(self.CACHE_DIR)
 
